@@ -1,6 +1,6 @@
 ﻿using System;                           // Required for the type 'Enum'
 using System.Collections.Generic;       // Required to use 'List<T>' and 'Dictionary<T, T>'
-using System.Text.RegularExpressions;   // Required to use Regular Expressions aka. 'Regex'
+using BennyBroseph.Contextual;
 
 namespace BennyBroseph
 {
@@ -12,7 +12,7 @@ namespace BennyBroseph
     /// </summary>
     /// <typeparam name="T">A 'System.Type' in which 'T.IsEnum()' is true</typeparam>
     [Serializable]
-    public sealed partial class FiniteStateMachine<T>
+    public sealed class FiniteStateMachine<T>
     {
         public delegate bool ValidateTransition();  // Delegate that will be used to determine if a state change is valid by the user
 
@@ -165,7 +165,7 @@ namespace BennyBroseph
         private void DebugMessage(object a_Message)
         {
 #if CONTEXT_DEBUG   // Only compiles if the build is using the 'ContextualDebug' by defining it in the build options
-            ContextualDebug.DebugMessage(a_Message);
+            Debug.Message(a_Message);
 #elif (!UNITY_EDITOR && DEBUG) // Only compiles when in debug mode and not in unity
             Console.WriteLine(a_Message);
 #endif
@@ -178,7 +178,7 @@ namespace BennyBroseph
         private void DebugWarning(object a_Message)
         {
 #if CONTEXT_DEBUG   // Only compiles if the build is using the 'ContextualDebug' by defining it in the build options
-            ContextualDebug.DebugWarning(a_Message);
+            Debug.Warning(a_Message);
 #elif (!UNITY_EDITOR && DEBUG) // Only compiles when in debug mode and not in unity
             Console.WriteLine(a_Message);
 #endif
@@ -191,7 +191,7 @@ namespace BennyBroseph
         private void DebugError(object a_Message)
         {
 #if CONTEXT_DEBUG   // Only compiles if the build is using the 'ContextualDebug' by defining it in the build options
-            ContextualDebug.DebugError(a_Message);
+            Debug.Error(a_Message);
 #elif (!UNITY_EDITOR && DEBUG) // Only compiles when in debug mode and not in unity
             Console.WriteLine(a_Message);
 #endif
